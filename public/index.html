@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#20202a">
+    <meta name="description" content="A field guide to dog breeds, personalities, and very good company.">
+    <title>The Dog Dept. — a field guide to good dogs</title>
+    <link rel="stylesheet" href="/styles.css">
+    <script src="/app.js" defer></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="#" aria-label="The Dog Dept. home">
+        <span class="brand-mark" aria-hidden="true">D</span>
+        <span>THE DOG DEPT<span class="brand-period">.</span></span>
+      </a>
+      <nav class="main-nav" aria-label="Main navigation">
+        <a class="nav-link" href="#breeds">01 — BREED INDEX</a>
+        <a class="nav-link" href="#about">02 — THE FINE PRINT</a>
+      </nav>
+      <a class="header-cta" href="#breeds">OPEN THE INDEX <span aria-hidden="true">↘</span></a>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <div class="eyebrow"><span class="eyebrow-dot"></span> A FIELD GUIDE FOR FUTURE DOG PEOPLE</div>
+          <h1 id="hero-title">All kinds.<br><span>One good dog.</span></h1>
+          <p class="hero-description">Big energy, tiny paws, serious couch credentials. Get to know the dogs behind the breeds.</p>
+          <a class="primary-button" href="#breeds">BROWSE THE BREED INDEX <span aria-hidden="true">↓</span></a>
+          <div class="hero-note"><strong aria-hidden="true">✳</strong><span id="breed-count">12 BREEDS. INFINITE PERSONALITY.</span></div>
+        </div>
+        <div class="hero-art" role="img" aria-label="An illustration of a cheerful golden dog">
+          <div class="hero-sun"></div>
+          <div class="hero-image-frame">
+            <img class="hero-image" src="/dog-hero.svg" alt="">
+          </div>
+          <div class="hero-sticker sticker-top">CERTIFIED<br>GOOD EGG <span aria-hidden="true">✳</span></div>
+          <div class="hero-sticker sticker-bottom"><span aria-hidden="true">★</span> 10/10 WOULD PET</div>
+          <span class="hero-sparkle sparkle-one" aria-hidden="true">✳</span>
+          <span class="hero-sparkle sparkle-two" aria-hidden="true">✦</span>
+        </div>
+        <div class="hero-index" aria-hidden="true">DD—001 / EST. FOR THE LOVE OF DOGS</div>
+      </section>
+
+      <div class="ticker" aria-label="All dogs are good dogs">
+        <span>NO BAD DOGS, JUST GOOD STORIES</span><b aria-hidden="true">✳</b>
+        <span>12 BREEDS TO GET TO KNOW</span><b aria-hidden="true">✳</b>
+        <span>NO BAD DOGS, JUST GOOD STORIES</span><b aria-hidden="true">✳</b>
+        <span>MADE FOR THE DOG-OBSESSED</span>
+      </div>
+
+      <section class="breed-section" id="breeds" aria-labelledby="breed-title">
+        <div class="section-heading">
+          <div>
+            <div class="eyebrow"><span class="eyebrow-dot"></span> THE MAIN EVENT — THE DOGS</div>
+            <h2 id="breed-title">Pick your <span>player.</span></h2>
+          </div>
+          <p class="section-intro">No rankings. No wrong answers. Just a few lovely breeds to start with.</p>
+        </div>
+        <div class="browse-layout">
+          <aside class="browse-sidebar" aria-label="Breed search and filters">
+            <div class="sidebar-label">01 / FIND YOUR TYPE</div>
+            <label class="search-box">
+              <span class="search-icon" aria-hidden="true"></span>
+              <span class="sr-only">Search breeds</span>
+              <input id="breed-search" type="search" placeholder="Try “fluffy”..." autocomplete="off">
+              <kbd>/</kbd>
+            </label>
+            <div class="sidebar-label">02 / PICK A MOOD</div>
+            <div class="filters" role="group" aria-label="Filter breeds">
+              <button class="filter-chip selected" type="button" data-filter="All" aria-pressed="true">All breeds <span>12</span></button>
+              <button class="filter-chip" type="button" data-filter="Family" aria-pressed="false">Good with family <span>02</span></button>
+              <button class="filter-chip" type="button" data-filter="Small" aria-pressed="false">Small & mighty <span>05</span></button>
+              <button class="filter-chip" type="button" data-filter="Active" aria-pressed="false">Always exploring <span>02</span></button>
+              <button class="filter-chip" type="button" data-filter="Fluffy" aria-pressed="false">Maximum fluff <span>03</span></button>
+            </div>
+            <p class="filter-hint">TIP: PRESS / TO START A SEARCH.<br>ESC CLEARS IT. GOOD LUCK OUT THERE.</p>
+          </aside>
+          <div class="breed-results">
+            <div class="result-bar"><span id="result-count"><strong>12</strong> BREEDS IN THE INDEX</span><span>EVERY PUP IS A GOOD PUP</span></div>
+            <div id="status-message" class="status-message" role="status" aria-live="polite">Fetching the good dogs...</div>
+            <div id="breed-grid" class="breed-grid" aria-live="polite"></div>
+            <p id="empty-message" class="empty-message" hidden>No matches. Try another search or mood.</p>
+          </div>
+        </div>
+        <div class="bottom-note"><span aria-hidden="true">✳</span> BREED NOTES ARE A STARTING POINT. PERSONALITIES ARE ALWAYS ONE OF ONE. <span aria-hidden="true">✳</span></div>
+      </section>
+
+      <section class="about-strip" id="about">
+        <span class="about-icon" aria-hidden="true">✳</span>
+        <p>Every dog is an individual. Breed traits can offer a few clues, but the best way to know a dog is to get to know that dog.</p>
+        <a href="#breeds">BACK TO THE INDEX <span aria-hidden="true">↑</span></a>
+      </section>
+    </main>
+    <footer class="site-footer">
+      <a class="brand footer-brand" href="#"><span class="brand-mark" aria-hidden="true">D</span><span>THE DOG DEPT<span class="brand-period">.</span></span></a>
+      <span>A FIELD GUIDE TO VERY GOOD DOGS <span aria-hidden="true">✳</span></span>
+    </footer>
+  </body>
+</html>
