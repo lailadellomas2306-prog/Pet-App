@@ -58,7 +58,7 @@ async function findBreedImage(breed) {
   }
 
   const image = {
-    url: data.message,
+    url: `/api/images/${encodeURIComponent(breed.id)}/photo`,
     sourceUrl: data.message,
     title: `${breed.name} dog`
   };
@@ -76,6 +76,43 @@ async function handleRequest(request, response) {
   const requestUrl = new URL(request.url, `http://${request.headers.host || "localhost"}`);
   if (requestUrl.pathname === "/api/breeds") {
     sendJson(response, 200, { breeds, imagesAvailable: true });
+    return;
+  }
+
+  const photoMatch = requestUrl.pathname.match(/^\/api\/images\/([a-z0-9-]+)\/photo$/);
+  if (photoMatch) {
+    const breed = breeds.find((item) => item.id === photoMatch[1]);
+    if (!breed) {
+      sendJson(response, 404, { error: "Breed not found." });
+      return;
+    }
+
+    try {
+      const image = await findBreedImage(breed);
+      const result = await fetch(image.sourceUrl, { signal: AbortSignal.timeout(10000) });
+      if (!result.ok) {
+        console.error(`Photo download failed for ${breed.name}: HTTP ${result.status}`);
+        sendJson(response, 502, { error: "The dog photo service could not provide this image." });
+        return;
+      }
+
+      const contentType = result.headers.get("content-type") || "";
+      if (!contentType.startsWith("image/")) {
+        console.error(`Photo download failed for ${breed.name}: unexpected content type ${contentType}`);
+        sendJson(response, 502, { error: "The dog photo service returned an invalid image." });
+        return;
+      }
+
+      response.writeHead(200, {
+        "Content-Type": contentType,
+        "Cache-Control": "public, max-age=3600",
+        "X-Content-Type-Options": "nosniff"
+      });
+      response.end(Buffer.from(await result.arrayBuffer()));
+    } catch (error) {
+      console.error(`Photo download failed for ${breed.name}: ${error.message}`);
+      if (!response.headersSent) sendJson(response, 502, { error: "The dog photo service is temporarily unavailable." });
+    }
     return;
   }
 

@@ -79,6 +79,7 @@ async function loadImage(photo) {
     }, { once: true });
     source.href = data.sourceUrl;
     source.hidden = false;
+    image.hidden = false;
     image.src = data.url;
   } catch (error) {
     placeholder.hidden = true;
