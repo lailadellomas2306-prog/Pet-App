@@ -6,7 +6,7 @@ const filterButtons = [...document.querySelectorAll(".filter-chip")];
 let breeds = [];
 let activeFilter = "All";
 let imageObserver;
-let imageSearchConfigured = false;
+let imagesAvailable = true;
 
 const imageMemo = new Map();
 
@@ -22,9 +22,7 @@ function escapeHtml(value) {
 
 function cardMarkup(breed, index) {
   const palettes = ["peach", "sage", "lavender", "butter", "blue", "rose"];
-  const photoMessage = imageSearchConfigured
-    ? "PHOTO COMING RIGHT UP"
-    : "GOOGLE IMAGE SEARCH REQUIRES AN EXISTING API ACCOUNT";
+  const photoMessage = imagesAvailable ? "LOADING A GOOD DOG..." : "DOG PHOTOS ARE TEMPORARILY UNAVAILABLE";
   return `
     <article class="breed-card" style="--card-delay:${index * 45}ms">
       <div class="card-photo ${palettes[index % palettes.length]}" data-breed="${escapeHtml(breed.id)}">
@@ -105,7 +103,7 @@ function renderBreeds() {
   statusMessage.hidden = true;
   document.querySelector("#result-count").innerHTML =
     `<strong>${visibleBreeds.length}</strong> ${visibleBreeds.length === 1 ? "BREED" : "BREEDS"} IN THE INDEX`;
-  if (imageSearchConfigured) observePhotos();
+  if (imagesAvailable) observePhotos();
   else imageObserver?.disconnect();
 }
 
@@ -117,7 +115,7 @@ async function loadBreeds() {
       throw new Error(data.error || "Could not load breeds from the server.");
     }
     breeds = data.breeds;
-    imageSearchConfigured = data.imageSearchConfigured === true;
+    imagesAvailable = data.imagesAvailable === true;
     document.querySelector("#breed-count").textContent =
       `${breeds.length} BREEDS. INFINITE PERSONALITY.`;
     filterButtons.forEach((button) => {
